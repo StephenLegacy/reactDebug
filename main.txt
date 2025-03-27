@@ -1,0 +1,30 @@
+# Debugging Process
+
+1. Setup
+
+I used a sample React application with multiple components, state management, and props passing.  
+The structure was like this:
+```
+App.js
+ ┣━ Navbar.js
+ ┣━ UserList.js
+ ┗━ UserCard.js
+
+2. Installation
+I installed the React Developer Tools Chrome extension to inspect component tree and state.
+✅ Installed and enabled
+
+3. Issues Found and Solutions
+
+| Issue | Description | Solution |
+| Incorrect State Value | The `showUsers` state was always `false` after clicking the toggle button | I checked in DevTools and noticed `setShowUsers` was not updating correctly. Fixed the button click handler. |
+| Missing Props | The `UserCard` component was receiving `undefined` values for `user` prop | In `UserList.js`, I was passing `user={user.name}` instead of `user={user}`. Fixed it. |
+| Unexpected Behavior | User list was re-rendering unnecessarily | Used `React.memo` in `UserList` component to prevent unnecessary re-renders. |
+| No Key in List | React DevTools showed a warning about missing `key` prop | I added `key={user.id}` in `.map()` function in `UserList.js`. |
+
+4. Verification
+After debugging:
+✅ State updates correctly when toggling  
+✅ Props passed correctly  
+✅ No warnings or errors in DevTools  
+✅ Application behavior is now smooth and expected
